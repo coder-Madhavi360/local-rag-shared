@@ -21,6 +21,8 @@ The system runs without external LLM APIs and is intended for research, experime
 ## System Architecture
 
 The system follows a modular RAG architecture. Documents are ingested, chunked, embedded, and indexed locally. At query time, relevant chunks are retrieved, reranked, and passed to a local LLM with citation-aware prompting. The generated answer is evaluated using local heuristic metrics and displayed alongside confidence scores and retrieved evidence.
+Persistent ChromaDB vector storage is used to maintain embeddings and retrieved knowledge across sessions.
+
 
 ## Retrieval and Generation Pipeline
 
