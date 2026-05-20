@@ -20,6 +20,18 @@ def insert_into_memory(conversation_memory, question, answer):
     )
 
 
+def insert_context(documents):
+    """
+    Prepare refined documents for generation.
+
+    The current generation layer already accepts document objects directly, so
+    this stage intentionally preserves that behavior while giving the pipeline
+    an explicit Insert step.
+    """
+
+    return documents
+
+
 def build_prompt(query, documents):
     """Compatibility helper for callers that imported this stage previously."""
 
