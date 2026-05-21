@@ -1,4 +1,25 @@
+from core.interfaces import BaseRetriever
 from retrieval.hybrid_retriever import hybrid_retrieve
+
+
+class HybridRetriever(BaseRetriever):
+    """Interface-compatible adapter for the existing hybrid retriever."""
+
+    def retrieve(
+        self,
+        query,
+        vector_store,
+        chunks,
+        top_k,
+        *args,
+        **kwargs,
+    ):
+        return retrieve_documents(
+            query=query,
+            vector_store=vector_store,
+            chunks=chunks,
+            top_k=top_k,
+        )
 
 
 def retrieve_documents(

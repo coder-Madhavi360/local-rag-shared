@@ -21,6 +21,24 @@ The system runs without external LLM APIs and is intended for research, experime
 ## System Architecture
 
 The system follows a modular RAG architecture. Documents are ingested, chunked, embedded, and indexed locally. At query time, relevant chunks are retrieved, reranked, and passed to a local LLM with citation-aware prompting. The generated answer is evaluated using local heuristic metrics and displayed alongside confidence scores and retrieved evidence.
+Persistent ChromaDB vector storage is used to maintain embeddings and retrieved knowledge across sessions.
+
+
+## Design Principles
+
+### Open/Closed Principle (OCP)
+
+The modular RAG pipeline follows the Open/Closed Principle by allowing new stages, retrievers, rerankers, and generators to be added independently without modifying the existing architecture.
+
+### Low Coupling and High Cohesion
+
+Each module in the system is designed with a single responsibility such as retrieval, reranking, generation, or evaluation to improve maintainability and modularity.
+
+### Abstraction Layer
+
+Abstract interfaces are used for retrievers, rerankers, and generators to support extensibility and cleaner architecture.
+
+
 
 ## Retrieval and Generation Pipeline
 

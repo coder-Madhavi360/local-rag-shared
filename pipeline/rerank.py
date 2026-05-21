@@ -1,4 +1,23 @@
+from core.interfaces import BaseReranker
 from retrieval.reranker import rerank_documents
+
+
+class CrossEncoderReranker(BaseReranker):
+    """Interface-compatible adapter for the existing CrossEncoder reranker."""
+
+    def rerank(
+        self,
+        query,
+        docs,
+        top_k=4,
+        *args,
+        **kwargs,
+    ):
+        return rerank_documents_stage(
+            query=query,
+            documents=docs,
+            top_k=top_k,
+        )
 
 
 def rerank_documents_stage(query, documents, top_k):
