@@ -18,11 +18,13 @@ The system runs without external LLM APIs and is intended for research, experime
 - Lightweight hallucination and answer-quality evaluation
 - Streamlit interface for interactive experimentation
 
-## System Architecture
+## Architecture Explanation
 
-The system follows a modular RAG architecture. Documents are ingested, chunked, embedded, and indexed locally. At query time, relevant chunks are retrieved, reranked, and passed to a local LLM with citation-aware prompting. The generated answer is evaluated using local heuristic metrics and displayed alongside confidence scores and retrieved evidence.
-Persistent ChromaDB vector storage is used to maintain embeddings and retrieved knowledge across sessions.
+The system is organized as a fully local RAG pipeline. Documents are first ingested and split into manageable chunks. Each chunk is embedded using a SentenceTransformer model and stored in a persistent ChromaDB vector store for semantic retrieval.
 
+When a user asks a question, the system retrieves candidate chunks using hybrid retrieval with ChromaDB semantic search and BM25 keyword search. A cross-encoder reranker then scores each query-context pair to improve precision. The highest-ranked chunks are passed to the local LLM using a citation-aware prompt, allowing the answer to reference supporting evidence.
+
+After generation, the system computes confidence and hallucination-related metrics using lightweight local heuristics. The final response, citations, evaluation scores, confidence score, and retrieved context are shown to the user for transparency.
 
 ## Design Principles
 
