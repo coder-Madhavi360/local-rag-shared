@@ -96,7 +96,7 @@ The system prioritizes transparency and local execution. Each stage of the RAG p
 
 Architecture Explanation
 
-The system is organized as a fully local RAG pipeline. Documents are first ingested and split into manageable chunks. Each chunk is embedded using a SentenceTransformer model and stored in a FAISS index for semantic retrieval.
+The system is organized as a fully local RAG pipeline. Documents are first ingested and split into manageable chunks. Each chunk is embedded using a SentenceTransformer model and stored in a persistent ChromaDB vector store for semantic retrieval.
 
 When a user asks a question, the system retrieves candidate chunks using hybrid retrieval. A cross-encoder reranker then scores each query-context pair to improve precision. The highest-ranked chunks are passed to the local LLM using a citation-aware prompt, allowing the answer to reference supporting evidence with inline citations.
 
